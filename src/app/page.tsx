@@ -10,7 +10,6 @@ export default function Home() {
         height={300}
         className="max-w-full h-auto"
       />
-      I AM MUSIC
     </div>
   );
 }
