@@ -67,7 +67,7 @@ export default function Page() {
                     className="w-full h-96 object-cover"
                 />
             </div>
-            <div className="">
+            <div className="h-96">
                 <HeroHighlightDemo>
                 </HeroHighlightDemo>
             </div>
@@ -79,7 +79,7 @@ export default function Page() {
                         {text: "od"},
                         {text: "TEBE"},
                     ]}
-                    className="pt-20 pb-10 text-center text-4xl font-bold"
+                    className="pt-56 pb-10 text-center text-4xl font-bold"
                 />
 
                 {companies.map(({company, project}) => (

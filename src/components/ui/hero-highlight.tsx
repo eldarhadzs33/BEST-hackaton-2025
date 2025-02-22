@@ -29,7 +29,7 @@ const HeroHighlight = ({
     return (
         <div
             className={cn(
-                "relative h-[40rem] flex items-center bg-white dark:bg-black justify-center w-full group",
+                "relative h-[33rem] flex items-center bg-white dark:bg-black justify-center w-full group",
                 containerClassName
             )}
             onMouseMove={handleMouseMove}
@@ -112,26 +112,30 @@ export function HeroHighlightDemo() {
                     duration: 0.5,
                     ease: [0.4, 0.0, 0.2, 1],
                 }}
-                className="text-2xl md:text-4xl lg:text-5xl font-bold text-neutral-700 dark:text-white max-w-4xl leading-relaxed lg:leading-snug text-center -mt-32"
+                className="text-2xl md:text-4xl lg:text-5xl font-bold text-neutral-700 dark:text-white max-w-4xl leading-relaxed lg:leading-snug text-center -mt-28"
             >
-                  <span className="-mb-6 block"> {/* Adjust mb-x value for spacing */}
-                  On Leaful:
+                <span className="-mb-10 block">
+                 On Leaful:
                  </span>
                 <br></br>
+                <span className="-mb-6 block">
                 <Highlight className="text-black dark:text-white">
                     126,783 projects funded
                 </Highlight>
+                </span>
                 <br></br>
-                <br></br>
+                <span className="-mb-6 block">
                 <Highlight className="text-black dark:text-white">
                     $2,142,345 raised
                 </Highlight>
+                </span>
                 <br></br>
-                <br></br>
+                <span className="-mb-6 block">
                 <Highlight className="text-black dark:text-white">
                     32,367,812 kg of CO2 reduced
                 </Highlight>
+                </span>
             </motion.h1>
         </HeroHighlight>
-    );
+);
 }
