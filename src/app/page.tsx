@@ -4,6 +4,7 @@ import Link from "next/link";
 import App from "@/components/ui/Navbar";
 import { TypewriterEffect } from "@/components/ui/typewriter-effect";
 import { DirectionAwareHover } from "@/components/ui/direction-aware-hover";
+import {HeroHighlightDemo} from "@/components/ui/hero-highlight";
 
 // Definisanje TypeScript interfejsa za podatke iz API-ja
 interface CompanyData {
@@ -58,19 +59,30 @@ export default function Page() {
 
     return (
         <div className="min-h-screen bg-gradient-to-b from-green-400 to-white py-10">
-            <App />
+            <App/>
+            <div className="w-full">
+                <img
+                    src="/slika_za_app.jpg"
+                    alt="Hero Image"
+                    className="w-full h-96 object-cover"
+                />
+            </div>
+            <div className="">
+                <HeroHighlightDemo>
+                </HeroHighlightDemo>
+            </div>
             <div className="container mx-auto flex flex-col items-center gap-12">
                 <TypewriterEffect
                     words={[
-                        { text: "Promjena" },
-                        { text: "počinje" },
-                        { text: "od" },
-                        { text: "TEBE" },
+                        {text: "Promjena"},
+                        {text: "počinje"},
+                        {text: "od"},
+                        {text: "TEBE"},
                     ]}
                     className="pt-20 pb-10 text-center text-4xl font-bold"
                 />
 
-                {companies.map(({ company, project }) => (
+                {companies.map(({company, project}) => (
                     <div
                         key={company.id}
                         className="flex flex-col md:flex-row items-center justify-between w-full max-w-4xl p-6 bg-white rounded-lg shadow-lg gap-8"
