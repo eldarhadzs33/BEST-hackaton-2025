@@ -11,7 +11,7 @@ export async function GET() {
         const client = await pool.connect();
         const result = await client.query(`
             SELECT id, first_name, last_name, username, xp,
-                   encode(profile_picture, 'base64') AS profile_picture
+                   profile_picture AS profile_picture
             FROM "Useri"
             ORDER BY xp DESC
             LIMIT 10;

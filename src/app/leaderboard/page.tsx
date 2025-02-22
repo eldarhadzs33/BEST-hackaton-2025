@@ -54,9 +54,8 @@ export default function Page() {
                                 <td className="p-3 flex items-center gap-4">
                                     <img
                                         src={
-                                            user.profile_picture
-                                                ? `data:image/png;base64,${user.profile_picture}`
-                                                : "/default-avatar.png"
+                                           `${user.profile_picture}`
+
                                         }
                                         alt="Avatar"
                                         className="w-10 h-10 rounded-full"
