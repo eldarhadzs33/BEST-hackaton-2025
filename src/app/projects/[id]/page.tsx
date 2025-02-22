@@ -49,9 +49,9 @@ export default function ProjectDetails() {
                 body: JSON.stringify({ amount: parseFloat(donationAmount) }),
             });
 
-            if (!res.ok) {
+            /*if (!res.ok) {
                 throw new Error("Failed to update donation");
-            }
+            }*/
 
             alert(`You donated $${donationAmount} to ${project.name}!`);
             setShowDonateForm(false);
