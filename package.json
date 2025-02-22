@@ -13,6 +13,7 @@
   "dependencies": {
     "@heroui/react": "^2.7.2",
     "@prisma/client": "^6.4.0",
+    "bcrypt": "^5.1.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.4.7",

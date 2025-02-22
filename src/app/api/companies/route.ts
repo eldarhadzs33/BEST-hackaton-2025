@@ -3,9 +3,11 @@ import { NextResponse } from "next/server";
 import { Pool } from "pg";
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL, // Ensure DATABASE_URL is set
-  ssl: { rejectUnauthorized: false },
+  connectionString: process.env.POSTGRES_URL,  // Use your .env variable
+  ssl: { rejectUnauthorized: false },  // ✅ Enforce SSL for NeonDB
 });
+
+
 
 export async function GET() {
   try {
@@ -28,7 +30,6 @@ export async function GET() {
     `;
     const { rows } = await pool.query(query);
 
-    // Map each row to an object with both company and project data
     const companies = rows.map((row) => ({
       company: {
         id: row.id,
