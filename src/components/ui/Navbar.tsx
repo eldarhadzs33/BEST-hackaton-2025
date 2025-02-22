@@ -10,7 +10,7 @@ import {
     DropdownMenu,
     Avatar,
   } from "@heroui/react";
-  
+
   export const AcmeLogo = () => {
     return (
       <svg fill="none" height="36" viewBox="0 0 32 32" width="36">
@@ -23,7 +23,7 @@ import {
       </svg>
     );
   };
-  
+
   export default function App() {
     return (
       <Navbar>
@@ -31,25 +31,25 @@ import {
           <AcmeLogo />
           <p className="font-bold text-inherit">ACME</p>
         </NavbarBrand>
-  
+
         <NavbarContent className="hidden sm:flex gap-4" justify="center">
           <NavbarItem>
             <Link color="foreground" href="#">
-              Features
+              Leaderboards
             </Link>
           </NavbarItem>
           <NavbarItem isActive>
             <Link aria-current="page" color="primary" href="#">
-              Customers
+              Forum
             </Link>
           </NavbarItem>
           <NavbarItem>
             <Link color="foreground" href="#">
-              Integrations
+              Crates
             </Link>
           </NavbarItem>
         </NavbarContent>
-  
+
         <NavbarContent as="div" justify="end">
           <Dropdown placement="bottom-end">
             <DropdownTrigger>
@@ -68,12 +68,7 @@ import {
                 <p className="font-semibold">Signed in as</p>
                 <p className="font-semibold">zoey@example.com</p>
               </DropdownItem>
-              <DropdownItem key="settings">My Settings</DropdownItem>
-              <DropdownItem key="team_settings">Team Settings</DropdownItem>
-              <DropdownItem key="analytics">Analytics</DropdownItem>
-              <DropdownItem key="system">System</DropdownItem>
-              <DropdownItem key="configurations">Configurations</DropdownItem>
-              <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem>
+              <DropdownItem key="my-profile">My Profile</DropdownItem>
               <DropdownItem key="logout" color="danger">
                 Log Out
               </DropdownItem>
@@ -83,4 +78,3 @@ import {
       </Navbar>
     );
   }
-  

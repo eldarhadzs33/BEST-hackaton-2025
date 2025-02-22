@@ -109,7 +109,9 @@
   }
 }
 
-
+.bg-gradient {
+  background: linear-gradient(to bottom, white, green);
+}
 
 @layer base {
   * {
