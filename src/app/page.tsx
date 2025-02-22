@@ -58,7 +58,7 @@ export default function Page() {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-green-400 to-white py-10">
+        <div className="min-h-screen bg-gradient-to-b from-[#059669] to-white py-10">
             <App/>
             <div className="w-full">
                 <img

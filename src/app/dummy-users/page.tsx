@@ -37,7 +37,7 @@ export default function UserProfile() {
     ];
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-green-400 to-white flex flex-col items-center">
+        <div className="min-h-screen bg-gradient-to-b from-green-400 to-white flex flex-col items-center mt-16">
             <App />
 
             <div className="container mx-auto flex flex-col items-center justify-center p-6">
