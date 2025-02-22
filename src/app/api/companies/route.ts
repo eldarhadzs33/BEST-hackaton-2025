@@ -1,11 +1,8 @@
 // src/app/api/companies/route.ts
 import { NextResponse } from "next/server";
-import { Pool } from "pg";
+import pool from "../../lib/db";
 
-const pool = new Pool({
-  connectionString: process.env.POSTGRES_URL,  // Use your .env variable
-  ssl: { rejectUnauthorized: false },  // ✅ Enforce SSL for NeonDB
-});
+
 
 
 

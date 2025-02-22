@@ -56,7 +56,6 @@ export default function Page() {
       </div>
     );
   }
-
   return (
       <div className="min-h-screen bg-gradient-to-b from-green-400 to-white py-10">
         <div className="container mx-auto flex flex-col items-center gap-8">
@@ -74,6 +73,7 @@ export default function Page() {
                   key={company.id}
                   className="flex flex-col md:flex-row items-center justify-center gap-8 w-full"
               >
+                <Link href={`/projects/${project.id}`}>
                 <DirectionAwareHover
                     imageUrl="/download.png" // Replace with your actual image path if needed
                     children="Support the cause!"
@@ -81,6 +81,7 @@ export default function Page() {
                     imageClassName="object-cover"
                     className="w-60 h-60 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-lg shadow-lg overflow-hidden"
                 />
+                </Link>
                 <div className="flex flex-col items-center justify-center gap-4 p-6 bg-white rounded-lg shadow-md">
                   {/* Clickable company name that leads to the company profile page */}
                   <Link

@@ -1,6 +1,7 @@
 import { Pool } from "pg";
 import { notFound } from "next/navigation";
 
+// Define the company data structure
 interface CompanyWithProject {
   id: number;
   name: string;
@@ -10,23 +11,15 @@ interface CompanyWithProject {
   project_description: string;
 }
 
+// PostgreSQL Connection Setup
 const pool = new Pool({
   connectionString: process.env.POSTGRES_URL,
   ssl: process.env.POSTGRES_URL?.includes("localhost") ? false : { rejectUnauthorized: false },
 });
 
-
-export default async function CompanyProfile({ params }: { params: { id?: string } }) {
-  if (!params?.id) {
-    return notFound();
-  }
-
+// Fetch company data (runs on the server)
+async function getCompany(companyId: number) {
   try {
-    const companyId = parseInt(params.id, 10); // ✅ Ensure ID is a number
-    if (isNaN(companyId)) {
-      return notFound();
-    }
-
     const query = `
       SELECT
         c.id AS id,
@@ -38,33 +31,43 @@ export default async function CompanyProfile({ params }: { params: { id?: string
       LEFT JOIN "Project" p ON c.id_project = p.id
       WHERE c.id = $1
     `;
-
     const { rows } = await pool.query<CompanyWithProject>(query, [companyId]);
 
     if (!rows || rows.length === 0) {
-      return notFound();
+      return null;
     }
 
-    const company = rows[0];
-
-    return (
-        <div className="min-h-screen bg-gray-100 p-10">
-          <div className="max-w-4xl mx-auto bg-white rounded shadow p-8">
-            <h1 className="text-4xl font-bold text-gray-800">{company.name}</h1>
-            <p className="mt-4 text-gray-600">{company.description}</p>
-            {company.project_name && (
-                <div className="mt-6">
-                  <h2 className="text-2xl font-semibold text-gray-700">
-                    Project: {company.project_name}
-                  </h2>
-                  <p className="mt-2 text-gray-600">{company.project_description}</p>
-                </div>
-            )}
-          </div>
-        </div>
-    );
+    return rows[0];
   } catch (error) {
     console.error("Error fetching company data:", error);
-    return notFound();
+    return null;
   }
+}
+
+// ✅ Use `async` in server component
+export default async function CompanyProfile({ params }: { params: { id?: string } }) {
+  if (!params?.id) return notFound();
+
+  const companyId = parseInt(params.id, 10);
+  if (isNaN(companyId)) return notFound();
+
+  const company = await getCompany(companyId);
+  if (!company) return notFound();
+
+  return (
+      <div className="min-h-screen bg-gray-100 p-10">
+        <div className="max-w-4xl mx-auto bg-white rounded shadow p-8">
+          <h1 className="text-4xl font-bold text-gray-800">{company.name}</h1>
+          <p className="mt-4 text-gray-600">{company.description}</p>
+          {company.project_name && (
+              <div className="mt-6">
+                <h2 className="text-2xl font-semibold text-gray-700">
+                  Project: {company.project_name}
+                </h2>
+                <p className="mt-2 text-gray-600">{company.project_description}</p>
+              </div>
+          )}
+        </div>
+      </div>
+  );
 }
