@@ -4,6 +4,7 @@ import Link from "next/link";
 import App from "@/components/ui/Navbar";
 import { TypewriterEffect } from "@/components/ui/typewriter-effect";
 import { DirectionAwareHover } from "@/components/ui/direction-aware-hover";
+import {HeroHighlightDemo} from "@/components/ui/hero-highlight";
 
 // Definisanje TypeScript interfejsa za podatke iz API-ja
 interface CompanyData {
@@ -22,6 +23,7 @@ interface ProjectData {
     goal: number;
     likes: number;
     donations: number;
+    picture: string;
 }
 
 interface CompanyWithProject {
@@ -57,28 +59,39 @@ export default function Page() {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-green-400 to-white py-10">
-            <App />
+        <div className="min-h-screen bg-gradient-to-b from-[#059669] to-white py-10">
+            <App/>
+            <div className="w-full">
+                <img
+                    src="/slika_za_app.jpg"
+                    alt="Hero Image"
+                    className="w-full h-96 object-cover"
+                />
+            </div>
+            <div className="h-96">
+                <HeroHighlightDemo>
+                </HeroHighlightDemo>
+            </div>
             <div className="container mx-auto flex flex-col items-center gap-12">
                 <TypewriterEffect
                     words={[
-                        { text: "Promjena" },
-                        { text: "počinje" },
-                        { text: "od" },
-                        { text: "TEBE" },
+                        {text: "Change"},
+                        {text: "starts"},
+                        {text: "with"},
+                        {text: "YOU!"},
                     ]}
-                    className="pt-20 pb-10 text-center text-4xl font-bold"
+                    className="pt-56 pb-10 text-center text-4xl font-bold"
                 />
 
-                {companies.map(({ company, project }) => (
+                {companies.map(({company, project}) => (
                     <div
                         key={company.id}
                         className="flex flex-col md:flex-row items-center justify-between w-full max-w-4xl p-6 bg-white rounded-lg shadow-lg gap-8"
                     >
                         <Link href={`/projects/${project.id}`}>
                             <DirectionAwareHover
-                                imageUrl="/download.png" // Zamijeni sa pravom slikom ako je potrebno
-                                children="Podrži projekat!"
+                                imageUrl={project.picture} // Zamijeni sa pravom slikom ako je potrebno
+                                children="Support the cause!"
                                 childrenClassName="text-2xl font-bold text-white"
                                 imageClassName="object-cover"
                                 className="w-60 h-60 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-lg shadow-md overflow-hidden"

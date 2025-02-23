@@ -31,7 +31,7 @@ export default function Page() {
     }, []);
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-green-400 to-white py-10 flex flex-col items-center">
+        <div className="min-h-screen bg-gradient-to-b from-[#059669] to-white py-10 flex flex-col items-center">
             <App />
             <h1 className="text-4xl font-bold text-gray-800 mt-10">Leaferboard</h1>
 
@@ -41,10 +41,10 @@ export default function Page() {
                 <div className="mt-8 w-full max-w-2xl bg-white rounded-lg shadow-lg p-6">
                     <table className="w-full text-left border-collapse">
                         <thead>
-                        <tr className="bg-green-500 text-white">
+                        <tr className="bg-[#059669] text-white">
                             <th className="p-3">Rank</th>
                             <th className="p-3">User</th>
-                            <th className="p-3 text-right">XP</th>
+                            <th className="p-3 text-right">LP</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -54,9 +54,8 @@ export default function Page() {
                                 <td className="p-3 flex items-center gap-4">
                                     <img
                                         src={
-                                            user.profile_picture
-                                                ? `data:image/png;base64,${user.profile_picture}`
-                                                : "/default-avatar.png"
+                                           `${user.profile_picture}`
+
                                         }
                                         alt="Avatar"
                                         className="w-10 h-10 rounded-full"
@@ -65,7 +64,7 @@ export default function Page() {
                                             {user.first_name} {user.last_name} (@{user.username})
                                         </span>
                                 </td>
-                                <td className="p-3 text-right font-semibold text-green-600">{user.xp}</td>
+                                <td className="p-3 text-right font-semibold text-[#059669]">{user.xp}</td>
                             </tr>
                         ))}
                         </tbody>

@@ -70,7 +70,9 @@ export async function PATCH(req: Request, context: { params: { id: string } }) {
         const updateUserXPQuery = `
             UPDATE "Useri"
             SET xp = xp + $1
-            WHERE username = $1
+
+            WHERE username = $2
+
             RETURNING *;
         `;
         const userResult = await client.query(updateUserXPQuery, [ amount, username]);
