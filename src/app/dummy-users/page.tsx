@@ -1,19 +1,38 @@
 "use client";
-import React from "react";
-import App from "@/components/ui/Navbar";
+
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { GlareCard } from "@/components/ui/glare-card"; // Assuming this is a custom component
+import { GlareCard } from "@/components/ui/glare-card";
+import App from "@/components/ui/Navbar";
 
 export default function UserProfile() {
-    // Dummy user data
-    const user = {
-        name: "Mirza The Math Wizard",
-        username: "mirza_voli_mat",
-        email: "mirza@school.com",
-        phone: "+387 60 15 14 99 34",
-        profilePicture: "/mirza.jpg", // Placeholder image
-        xp: 3141
-    };
+    const [xp, setXp] = useState<number | null>(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+
+    // Fetch XP from API
+    async function fetchUserXP() {
+        try {
+            const res = await fetch("/api/get-xp");
+            const data = await res.json();
+
+            if (res.ok) {
+                setXp(data.xp);
+            } else {
+                setError(data.error || "Failed to fetch XP.");
+            }
+        } catch (err) {
+            console.error("Error fetching XP:", err);
+            setError("Failed to connect to server.");
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    // Fetch XP on component mount
+    useEffect(() => {
+        fetchUserXP();
+    }, []);
 
     // Dummy supported projects
     const supportedProjects = [
@@ -53,8 +72,14 @@ export default function UserProfile() {
                         </p>
                         <br/>
                         <hr/>
-                        <h4 className="text-center mt-2 font-bold text-info">Total LP:</h4>
-                        <h1 className="text-4xl text-center mt-2 font-bold text-info">{user.xp}</h1>
+                        <h4 className="text-center mt-2 font-bold text-info">Total XP:</h4>
+                        {loading ? (
+                            <p className="text-gray-500 mt-4">Loading XP...</p>
+                        ) : error ? (
+                            <p className="text-red-500">{error}</p>
+                        ) : (
+                            <h1 className="text-4xl text-center mt-2 font-bold text-info">{xp}</h1>
+                        )}
                         <br/>
                         <h4 className="text-center mt-2 font-bold text-info">Leaderboard position:</h4>
                         <h1 className="text-5xl text-center mt-2 font-bold text-info">1</h1>
@@ -64,19 +89,17 @@ export default function UserProfile() {
                     <div className="bg-white p-9 shadow-lg rounded-lg flex flex-col items-center justify-center">
                         {/* Profile Picture */}
                         <Image
-                            src={
-                                user.profilePicture
-                            }
+                            src="/mirza.jpg"
                             alt="User Profile"
                             width={120}
                             height={120}
                             className="rounded-full border border-green-500 shadow-md"
                         />
                         {/* User Information */}
-                        <h1 className="text-2xl font-bold text-green-800 mt-4">{user.name}</h1>
-                        <p className="text-gray-600 text-lg">@{user.username}</p>
-                        <p className="text-gray-500">{user.email}</p>
-                        <p className="text-gray-500">{user.phone}</p>
+                        <h1 className="text-2xl font-bold text-green-800 mt-4">Mirza The Math Wizard</h1>
+                        <p className="text-gray-600 text-lg">@mirza_voli_mat</p>
+                        <p className="text-gray-500">mirza@school.com</p>
+                        <p className="text-gray-500">+387 60 15 14 99 34</p>
                     </div>
                 </div>
 
