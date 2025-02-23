@@ -12,6 +12,7 @@ export default function UserProfile() {
         email: "mirza@school.com",
         phone: "+387 60 15 14 99 34",
         profilePicture: "/mirza.jpg", // Placeholder image
+        xp: 3141
     };
 
     // Dummy supported projects
@@ -44,11 +45,19 @@ export default function UserProfile() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center justify-center text-center">
 
                     {/* Left Card */}
-                    <GlareCard className="p-6 bg-green-700 text-white shadow-lg rounded-lg flex flex-col justify-center items-center">
-                        <h2 className="text-2xl font-bold">🌿 I Love Math and Nature</h2>
+                    <GlareCard
+                        className="p-6 bg-green-700 text-white shadow-lg rounded-lg flex flex-col justify-center items-center">
+                        <h2 className="text-2xl font-bold">🌿 Naturalist 🌿</h2>
                         <p className="text-center mt-2">
                             Protecting the environment is not an obligation; it’s our responsibility.
                         </p>
+                        <br/>
+                        <hr/>
+                        <h4 className="text-center mt-2 font-bold text-info">Total LP:</h4>
+                        <h1 className="text-4xl text-center mt-2 font-bold text-info">{user.xp}</h1>
+                        <br/>
+                        <h4 className="text-center mt-2 font-bold text-info">Leaderboard position:</h4>
+                        <h1 className="text-5xl text-center mt-2 font-bold text-info">1</h1>
                     </GlareCard>
 
                     {/* Center Profile Details */}

@@ -23,6 +23,7 @@ interface ProjectData {
     goal: number;
     likes: number;
     donations: number;
+    picture: string;
 }
 
 interface CompanyWithProject {
@@ -74,10 +75,10 @@ export default function Page() {
             <div className="container mx-auto flex flex-col items-center gap-12">
                 <TypewriterEffect
                     words={[
-                        {text: "Promjena"},
-                        {text: "počinje"},
-                        {text: "od"},
-                        {text: "TEBE!"},
+                        {text: "Change"},
+                        {text: "starts"},
+                        {text: "with"},
+                        {text: "YOU!"},
                     ]}
                     className="pt-56 pb-10 text-center text-4xl font-bold"
                 />
@@ -89,8 +90,8 @@ export default function Page() {
                     >
                         <Link href={`/projects/${project.id}`}>
                             <DirectionAwareHover
-                                imageUrl="/download.png" // Zamijeni sa pravom slikom ako je potrebno
-                                children="Podrži projekat!"
+                                imageUrl={project.picture} // Zamijeni sa pravom slikom ako je potrebno
+                                children="Support the cause!"
                                 childrenClassName="text-2xl font-bold text-white"
                                 imageClassName="object-cover"
                                 className="w-60 h-60 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-lg shadow-md overflow-hidden"

@@ -22,7 +22,7 @@ export default function ProjectDetails() {
                 const data = await res.json();
                 setProject(data);
             } catch (err) {
-                //setError("Failed to load project");
+                setError("Failed to load project");
             } finally {
                 setLoading(false);
             }
@@ -49,15 +49,14 @@ export default function ProjectDetails() {
                 body: JSON.stringify({ amount: parseFloat(donationAmount) }),
             });
 
-            /*if (!res.ok) {
+            if (!res.ok) {
                 throw new Error("Failed to update donation");
-            }*/
+            }
 
             alert(`You donated $${donationAmount} to ${project.name}!`);
             setShowDonateForm(false);
             setDonationAmount("");
 
-            // Update project state to reflect new donations
             const updatedProject = await res.json();
             setProject(updatedProject);
         } catch (error) {
@@ -66,72 +65,85 @@ export default function ProjectDetails() {
         }
     };
 
-
     if (loading) return <p className="text-center text-green-700">Loading...</p>;
     if (error) return <p className="text-center text-red-600">{error}</p>;
 
     return (
-        <div className="max-w-3xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden p-6 border border-green-300">
-            {project.picture && (
-                <div className="w-full h-64 relative">
-                    <Image
-                        src={`data:image/png;base64,${project.picture.toString("base64")}`}
-                        alt={project.name}
-                        layout="fill"
-                        objectFit="cover"
-                        className="rounded-t-lg"
-                    />
-                </div>
-            )}
-            <h1 className="text-3xl font-bold text-green-800 mt-4">{project.name}</h1>
-            <h3 className="text-3xl font-bold text-green-800 mt-4">{project.esg_rating}</h3>
-            <p className="text-gray-600 text-sm mt-1">
-                Created on: {new Date(project.date_create).toLocaleDateString()}
-            </p>
-            <p className="mt-4 text-gray-700">{project.description}</p>
-            <div className="mt-6">
-                <p className="text-lg text-green-700 font-semibold">Goal: ${project.goal}</p>
-                <p className="text-lg text-blue-600 font-semibold">Current Donations: ${project.donations}</p>
-            </div>
-            <div className="mt-6 flex justify-between">
-                <button
-                    className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
-                    onClick={handleDonate}
-                >
-                    Donate Now
-                </button>
-
-            </div>
-
-            {/* MODAL ZA DONACIJU */}
-            {showDonateForm && (
-                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-                    <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-                        <h2 className="text-xl font-bold text-green-800 mb-4">Donate to {project.name}</h2>
-                        <input
-                            type="number"
-                            className="w-full p-2 border border-gray-300 rounded-lg mb-4"
-                            placeholder="Enter amount (USD)"
-                            value={donationAmount}
-                            onChange={(e) => setDonationAmount(e.target.value)}
+        <div
+            className="flex justify-center items-center min-h-screen bg-gray-100 p-6"
+            style={{
+                backgroundImage: "url('/background-projekata.jpg')", // Putanja do slike
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+            }}
+        >
+        <div className="flex justify-center items-center bg-gray-100">
+            <div className="max-w-3xl w-full bg-white shadow-lg rounded-lg overflow-hidden border border-green-300 p-5">
+                {project.picture && (
+                    <div className="h-64 relative mt-5 ms-5 mb-5 me-5">
+                        <Image
+                            src={project.picture}
+                            alt={project.name}
+                            layout="fill"
+                            objectFit="cover"
+                            className="rounded-t-lg"
                         />
-                        <div className="flex justify-end space-x-2">
-                            <button
-                                className="px-4 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-500"
-                                onClick={() => setShowDonateForm(false)}
-                            >
-                                Cancel
-                            </button>
-                            <button
-                                className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
-                                onClick={handlePayment}
-                            >
-                                Pay
-                            </button>
+                    </div>
+                )}
+                <h1 className="text-3xl font-bold text-green-800 mt-4 text-center">{project.name}</h1>
+                <h3 className="text-xl font-semibold text-green-700 text-center">
+                    ESG Rating: {Array(project.esg_rating).fill("🍃").join(" ")}
+                </h3>
+
+                <p className="text-gray-600 text-sm mt-1 text-center">
+                    Created on: {new Date(project.date_create).toLocaleDateString()}
+                </p>
+                <p className="mt-4 text-gray-700 text-center">{project.description}</p>
+                <div className="mt-6 text-center">
+                    <p className="text-lg text-green-700 font-semibold">Goal: ${project.goal}</p>
+                    <p className="text-lg text-blue-600 font-semibold">Current Donations: ${project.donations}</p>
+                </div>
+                <div className="mt-6 flex justify-center">
+                    <button
+                        className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 mb-5"
+                        onClick={handleDonate}
+                    >
+                        Donate Now
+                    </button>
+                </div>
+
+                {showDonateForm && (
+                    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                        <div className="bg-white p-6 rounded-lg shadow-lg w-96">
+                            <h2 className="text-xl font-bold text-green-800 mb-4 text-center">
+                                Donate to {project.name}
+                            </h2>
+                            <input
+                                type="number"
+                                className="w-full p-2 border border-gray-300 rounded-lg mb-4"
+                                placeholder="Enter amount (USD)"
+                                value={donationAmount}
+                                onChange={(e) => setDonationAmount(e.target.value)}
+                            />
+                            <div className="flex justify-center space-x-4">
+                                <button
+                                    className="px-4 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-500"
+                                    onClick={() => setShowDonateForm(false)}
+                                >
+                                    Cancel
+                                </button>
+                                <button
+                                    className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
+                                    onClick={handlePayment}
+                                >
+                                    Pay
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            )}
+                )}
+            </div>
+        </div>
         </div>
     );
 }

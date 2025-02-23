@@ -21,7 +21,8 @@ export async function GET() {
         p.date_create AS date_create,
         p.goal AS goal,
         p.likes AS likes,
-        p.donations AS donations
+        p.donations AS donations,
+        p.picture AS picture
       FROM "Company" c
       INNER JOIN "Project" p ON c.id_project = p.id
     `;
@@ -43,6 +44,7 @@ export async function GET() {
         goal: row.goal,
         likes: row.likes,
         donations: row.donations,
+        picture: row.picture
       },
     }));
 
