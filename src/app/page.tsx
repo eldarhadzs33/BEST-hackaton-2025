@@ -77,7 +77,7 @@ export default function Page() {
                         {text: "Promjena"},
                         {text: "počinje"},
                         {text: "od"},
-                        {text: "TEBE"},
+                        {text: "TEBE!"},
                     ]}
                     className="pt-56 pb-10 text-center text-4xl font-bold"
                 />
