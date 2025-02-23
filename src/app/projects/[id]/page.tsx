@@ -22,7 +22,9 @@ export default function ProjectDetails() {
                 const data = await res.json();
                 setProject(data);
             } catch (err) {
-                setError("Failed to load project");
+
+                //setError("Failed to load project");
+
             } finally {
                 setLoading(false);
             }
@@ -57,6 +59,7 @@ export default function ProjectDetails() {
             setShowDonateForm(false);
             setDonationAmount("");
 
+
             const updatedProject = await res.json();
             setProject(updatedProject);
         } catch (error) {
@@ -64,6 +67,7 @@ export default function ProjectDetails() {
             alert("Donation failed. Please try again.");
         }
     };
+
 
     if (loading) return <p className="text-center text-green-700">Loading...</p>;
     if (error) return <p className="text-center text-red-600">{error}</p>;
@@ -103,6 +107,7 @@ export default function ProjectDetails() {
                     <p className="text-lg text-green-700 font-semibold">Goal: ${project.goal}</p>
                     <p className="text-lg text-blue-600 font-semibold">Current Donations: ${project.donations}</p>
                 </div>
+
                 <div className="mt-6 flex justify-center">
                     <button
                         className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 mb-5"
@@ -142,7 +147,39 @@ export default function ProjectDetails() {
                         </div>
                     </div>
                 )}
+
+
             </div>
+
+            {/* MODAL ZA DONACIJU */}
+            {showDonateForm && (
+                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                    <div className="bg-white p-6 rounded-lg shadow-lg w-96">
+                        <h2 className="text-xl font-bold text-green-800 mb-4">Donate to {project.name}</h2>
+                        <input
+                            type="number"
+                            className="w-full p-2 border border-gray-300 rounded-lg mb-4"
+                            placeholder="Enter amount (USD)"
+                            value={donationAmount}
+                            onChange={(e) => setDonationAmount(e.target.value)}
+                        />
+                        <div className="flex justify-end space-x-2">
+                            <button
+                                className="px-4 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-500"
+                                onClick={() => setShowDonateForm(false)}
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
+                                onClick={handlePayment}
+                            >
+                                Pay
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
         </div>
     );
